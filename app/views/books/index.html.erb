@@ -8,6 +8,7 @@
     <table>
         <thead>
             <tr>
+
                 <th>Title</th>
                 <th>Body</th>
                 <th colspan="3"></th>
@@ -15,37 +16,46 @@
         </thead>
 
         <tbody>
+        　<% @book.each do |book| %>
           <tr>
-              <td>リーダブルコード</td>
-            <td>より良いコードを書くためのシンプルで実践的なテクニック</td>
+
+            <td><%= book.title %></td>
+            <td><%= book.body %></td>
             <td><a class="show_19659" href="/books/19659">Show</a></td>
             <td><a class="edit_19659" href="/books/19659/edit">Edit</a></td>
             <td><a data-confirm="Are you sure?" class="destroy_19659" rel="nofollow" data-method="delete" href="/books/19659">Destroy</a></td>
+
           </tr>
-            
+　　　　　<% end %>
+
         </tbody>
-        
+         <!--<tbody>-->
+          <!--<tr>-->
+
+            <!--<td>リーダブルコード</td>-->
+            <!--<td>より良いコードを書くためのシンプルで実践的なテクニック</td>-->
+            <!--<td><a class="show_19659" href="/books/19659">Show</a></td>-->
+            <!--<td><a class="edit_19659" href="/books/19659/edit">Edit</a></td>-->
+            <!--<td><a data-confirm="Are you sure?" class="destroy_19659" rel="nofollow" data-method="delete" href="/books/19659">Destroy</a></td>-->
+          <!--</tr>-->
+
+        <!--</tbody>-->
 
 
-        
+
+
     </table>
 
-    <h2>New book</h2>
-    <form class="new_book" id="new_book" action="/books" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="rnlU4FUGIYjL8tbmY5sCAqWwZ2quYb8Q1JR5SQM6gtwPoOiUYR2cNiOBKrfrdsbDCNE4EL3elpBOgE/a0/+ofQ==">
+    <div class="new">
+        <h2>New book</h2>
 
-       <div class="field">
-         <label for="book_title">Title</label>
-         <input class="book_title" type="text" name="book[title]" id="book_title">
-        </div>
-
-        <div class="field">
-         <label for="book_body">Body</label>
-         <textarea class="book_body" name="book[body]" id="book_body"></textarea>
-        </div>
-
-        <div class="actions">
-         <input type="submit" name="commit" value="Create Book" data-disable-with="Create Book">
-        </div>
-    </form>
+          <%= form_with model: @book,url:'/books',local:true do |f| %>
+           <h4>Title</h4>
+            <%= f.text_field :title %>
+           <h4>本文</h4>
+            <%= f.text_area :body %>
+            <%= f.submit 'Create Book' %>
+          <% end %>
+    </div>
 
   </body>
